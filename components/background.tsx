@@ -6,7 +6,7 @@ export default function Background({children}:any) {
   return (
     <>
     <LinearGradient
-        colors={['#5199E8', '#54E7E2']}
+        colors={['#0258D6', '#09DDD3']}
         style={styles.background}
       />
       <LinearGradient
