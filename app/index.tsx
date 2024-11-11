@@ -9,9 +9,12 @@ import {
 } from "react-native";
 import * as Font from "expo-font";
 import { useEffect, useState } from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from '@expo/vector-icons/Feather';
+import Topbar from "@/components/topbar";
+
+
+
 
 export default function Index() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -33,13 +36,7 @@ export default function Index() {
   return (
     <>
       <Background>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => setIsDrawer(true)}>
-            <Ionicons name="menu" size={30} color="white" />
-          </TouchableOpacity>
-          <Text style={styles.title}>SweaterHub</Text>
-          <Ionicons name="cart-outline" size={30} color="white" />
-        </View>
+        <Topbar setIsDrawer={setIsDrawer} title={"SweaterHub"}/>
         <View style={styles.search}>
           <TouchableOpacity style={styles.filter}>
           <Feather name="filter" size={24} color="white" />

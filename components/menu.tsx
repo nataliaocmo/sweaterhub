@@ -18,7 +18,7 @@ export default function Menu({ isDrawer, onClose, fontFamily }: MenuProps) {
           <TouchableOpacity onPress={onClose} style={{ marginBottom: 40 }}>
             <Ionicons name="menu" size={50} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{router.push('/');onClose();}} >
             <Text style={[styles.title, { fontFamily }]}>Home</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={()=>{router.push('/pages/create');onClose();}}>
