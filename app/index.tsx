@@ -11,6 +11,7 @@ import * as Font from "expo-font";
 import { useEffect, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
+import Feather from '@expo/vector-icons/Feather';
 
 export default function Index() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -41,7 +42,7 @@ export default function Index() {
         </View>
         <View style={styles.search}>
           <TouchableOpacity style={styles.filter}>
-            <Ionicons name="filter" size={27} color="white" />
+          <Feather name="filter" size={24} color="white" />
           </TouchableOpacity>
           <View style={styles.inputContainer}>
             <TextInput
