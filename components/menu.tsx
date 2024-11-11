@@ -22,6 +22,9 @@ export default function Menu({ isDrawer, onClose, fontFamily }: MenuProps) {
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={[styles.title, { fontFamily }]}>Home</Text>
+            <TouchableOpacity>
+            <Text style={[styles.title, { fontFamily }]}>Create</Text>
+          </TouchableOpacity>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={[styles.title, { fontFamily }]}>My acount</Text>
