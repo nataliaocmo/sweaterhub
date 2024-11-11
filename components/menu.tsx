@@ -13,7 +13,7 @@ export default function Menu({ isDrawer, onClose, fontFamily }: MenuProps) {
   return (
     <Modal transparent={true} visible={isDrawer} animationType="slide">
       <BlurView
-        intensity={50} // Controla la intensidad del desenfoque
+        intensity={50}
         style={styles.modalBlurView}
       >
         <View style={styles.spacing}>
