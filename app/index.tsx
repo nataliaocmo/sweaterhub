@@ -10,11 +10,8 @@ import {
 import * as Font from "expo-font";
 import { useEffect, useState } from "react";
 import Entypo from "@expo/vector-icons/Entypo";
-import Feather from '@expo/vector-icons/Feather';
+import Feather from "@expo/vector-icons/Feather";
 import Topbar from "@/components/topbar";
-
-
-
 
 export default function Index() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -33,13 +30,17 @@ export default function Index() {
 
   const closeMenu = () => setIsDrawer(false);
 
+  if (!fontLoaded) {
+    return null;
+  }
+
   return (
     <>
       <Background>
-        <Topbar setIsDrawer={setIsDrawer} title={"SweaterHub"}/>
+        <Topbar setIsDrawer={setIsDrawer} title={"SweaterHub"} />
         <View style={styles.search}>
           <TouchableOpacity style={styles.filter}>
-          <Feather name="filter" size={24} color="white" />
+            <Feather name="filter" size={24} color="white" />
           </TouchableOpacity>
           <View style={styles.inputContainer}>
             <TextInput
@@ -47,7 +48,12 @@ export default function Index() {
               placeholder="Find your style"
               placeholderTextColor="#aaa"
             />
-            <Entypo name="magnifying-glass" size={24} color="black" style={styles.searchIcon}/>
+            <Entypo
+              name="magnifying-glass"
+              size={24}
+              color="black"
+              style={styles.searchIcon}
+            />
           </View>
         </View>
       </Background>
@@ -90,13 +96,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 50,
     borderColor: "black",
-    borderWidth: 1
+    borderWidth: 1,
   },
-  search:{
+  search: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
-    justifyContent: "space-evenly"
-  }
+    justifyContent: "space-evenly",
+  },
 });

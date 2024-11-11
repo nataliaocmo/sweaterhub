@@ -24,10 +24,10 @@ export default function Menu({ isDrawer, onClose, fontFamily }: MenuProps) {
           <TouchableOpacity onPress={()=>{router.push('/pages/create');onClose();}}>
               <Text style={[styles.title, { fontFamily }]}>Create</Text>
             </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{router.push('/pages/account');onClose();}}>
             <Text style={[styles.title, { fontFamily }]}>My acount</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{router.push('/pages/designs');onClose();}}>
             <Text style={[styles.title, { fontFamily }]}>My designs</Text>
           </TouchableOpacity>
           <TouchableOpacity>
