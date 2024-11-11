@@ -2,6 +2,7 @@ import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { BlurView } from "expo-blur";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { router } from "expo-router";
 
 interface MenuProps {
   isDrawer: boolean;
@@ -12,20 +13,17 @@ interface MenuProps {
 export default function Menu({ isDrawer, onClose, fontFamily }: MenuProps) {
   return (
     <Modal transparent={true} visible={isDrawer} animationType="slide">
-      <BlurView
-        intensity={50}
-        style={styles.modalBlurView}
-      >
+      <BlurView intensity={50} style={styles.modalBlurView}>
         <View style={styles.spacing}>
           <TouchableOpacity onPress={onClose} style={{ marginBottom: 40 }}>
             <Ionicons name="menu" size={50} color="white" />
           </TouchableOpacity>
           <TouchableOpacity>
             <Text style={[styles.title, { fontFamily }]}>Home</Text>
-            <TouchableOpacity>
-            <Text style={[styles.title, { fontFamily }]}>Create</Text>
           </TouchableOpacity>
-          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>{router.push('/pages/create');onClose();}}>
+              <Text style={[styles.title, { fontFamily }]}>Create</Text>
+            </TouchableOpacity>
           <TouchableOpacity>
             <Text style={[styles.title, { fontFamily }]}>My acount</Text>
           </TouchableOpacity>
