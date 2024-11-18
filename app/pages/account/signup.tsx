@@ -5,6 +5,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Animated,
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import Background from "@/components/background";
@@ -19,6 +23,7 @@ export default function signup() {
   const [password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const { signUp, state } = useContext(AuthContext);
+  const [bottomMargin] = useState(new Animated.Value(0));
 
   useEffect(() => {
     
@@ -54,9 +59,39 @@ export default function signup() {
     }
   };
 
+  useEffect(() => {
+    const keyboardShowListener = Keyboard.addListener(
+      Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow",
+      (event) => {
+        animateMarginBottom(150); // Animar el margen cuando el teclado se muestra
+      }
+    );
+    const keyboardHideListener = Keyboard.addListener(
+      Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide",
+      () => {
+        animateMarginBottom(0); // Volver al margen original cuando el teclado se oculta
+      }
+    );
+
+    return () => {
+      keyboardShowListener.remove();
+      keyboardHideListener.remove();
+    };
+  }, []);
+
+  // Función de animación para el margen inferior
+  const animateMarginBottom = (toValue: any) => {
+    Animated.timing(bottomMargin, {
+      toValue,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
   return (
     <Background>
-      <View style={styles.back}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Animated.View style={[styles.back, { marginBottom: bottomMargin }]}>
         <Text style={styles.title}>Welcome to SweaterHub</Text>
         <View style={styles.box}>
           <Text>Name</Text>
@@ -110,7 +145,8 @@ export default function signup() {
             <Text>Sign In</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
+      </TouchableWithoutFeedback>
     </Background>
   );
 }
