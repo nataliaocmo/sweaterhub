@@ -1,18 +1,20 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Background from '@/components/background'
 import Menu from '@/components/menu'
 import Topbar from '@/components/topbar';
 import { AuthContext } from '@/context/authContext/AuthContext';
 import { router } from 'expo-router';
+import { dataContext } from '@/context/dataContext/dataContext';
 
 export default function index() {
     const [isDrawer, setIsDrawer] = useState(false);
-    const {state} = useContext(AuthContext)
+    const {state, logout} = useContext(AuthContext)
+    const {dataState} = useContext(dataContext);
     const closeMenu = () => setIsDrawer(false);
 
     const Logged = () =>{
-      if (state.isLogged == false){
+      if (!state.isLogged){
         return(
           <View style={styles.all}>
             <Text style={styles.title}>It seems that your not in</Text>
@@ -26,10 +28,12 @@ export default function index() {
           </View>
         )
       }
+      
       return(
         <>
-          <TouchableOpacity onPress={()=>console.log(state.user.uid)}>
-            <Text>ehm</Text>
+          <Text>Hello, {dataState.name}</Text>
+          <TouchableOpacity onPress={logout}>
+            <Text>Log out</Text>
           </TouchableOpacity>
         </>
       )

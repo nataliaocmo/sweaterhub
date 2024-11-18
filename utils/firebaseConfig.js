@@ -1,12 +1,10 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Tu configuración de Firebase (asegúrate de agregarla aquí)
 const firebaseConfig = {
   apiKey: "AIzaSyAItCwtQa0acZhV1kzYjjbbonI103klGFs",
   authDomain: "swetterhub.firebaseapp.com",
@@ -17,8 +15,19 @@ const firebaseConfig = {
   measurementId: "G-8QY85CHSM7"
 };
 
-// Initialize Firebase
+// Inicializar Firebase
 export const app = initializeApp(firebaseConfig);
+
+// Analytics (asegúrate de que Analytics sea compatible con tu entorno)
 const analytics = getAnalytics(app);
 
+// Firestore
 export const db = getFirestore(app);
+
+// Auth con persistencia para React Native
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
+
+
+

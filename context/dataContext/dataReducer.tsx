@@ -5,11 +5,11 @@ export interface DataState{
     orders?: any
 }
 
-type ActionsProps = {type:"LOGIN",payload: any} | {type:"LOGOUT"}
+type ActionsProps = {type:"GET",payload: any} | {type:"LOGOUT"}
 
 export const DataReducer = (state:any, actions:any)=> {
     switch(actions.type){
-        case "LOGIN":
+        case "GET":
             return {
                 ...state,
                 name: actions.payload.name,

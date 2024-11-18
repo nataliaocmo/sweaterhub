@@ -8,14 +8,18 @@ import {
   TextInput,
 } from "react-native";
 import * as Font from "expo-font";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import Topbar from "@/components/topbar";
+import { AuthContext } from "@/context/authContext/AuthContext";
+import { dataContext } from "@/context/dataContext/dataContext";
 
 export default function Index() {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [isDrawer, setIsDrawer] = useState(false);
+  const { state } = useContext(AuthContext);
+  const { dataState, getUserinfo } = useContext(dataContext);
 
   useEffect(() => {
     async function loadFonts() {
@@ -27,6 +31,12 @@ export default function Index() {
 
     loadFonts();
   }, []);
+
+  useEffect(()=>{
+    if(state.isLogged){
+      getUserinfo(state.user.uid);
+    }
+  },[])
 
   const closeMenu = () => setIsDrawer(false);
 
