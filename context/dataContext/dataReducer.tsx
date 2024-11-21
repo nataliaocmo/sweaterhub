@@ -3,6 +3,7 @@ export interface DataState{
     lastname?: String;
     email?: String;
     orders?: any
+    card?: [];
 }
 
 type ActionsProps = {type:"GET",payload: any} | {type:"LOGOUT"}
@@ -15,7 +16,9 @@ export const DataReducer = (state:any, actions:any)=> {
                 name: actions.payload.name,
                 lastname: actions.payload.lastname,
                 email: actions.payload.email,
-                orders: actions.payload.orders
+                orders: actions.payload.orders,
+                card: actions.payload.card
+
             }
         case "LOGOUT":
             return{
@@ -23,7 +26,8 @@ export const DataReducer = (state:any, actions:any)=> {
                 name: null,
                 lastname: null,
                 email: null,
-                orders: undefined
+                orders: undefined,
+                card: undefined
             }
         default:
             return state
