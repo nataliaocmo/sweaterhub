@@ -14,6 +14,7 @@ import Feather from "@expo/vector-icons/Feather";
 import Topbar from "@/components/topbar";
 import { AuthContext } from "@/context/authContext/AuthContext";
 import { dataContext } from "@/context/dataContext/dataContext";
+import React from "react";
 
 export default function Index() {
   const [fontLoaded, setFontLoaded] = useState(false);
