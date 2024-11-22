@@ -30,6 +30,7 @@ export default function index() {
         <Image 
         source= {selectedImage}
         style={{width: 300, height: 300}}
+       
         >
         </Image>
       </View>
@@ -91,11 +92,6 @@ export default function index() {
           
           <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#004805' }]}></Text></TouchableOpacity>
           
-          
-          
-          
-          
-          
         </View>
       </View>
 
@@ -156,7 +152,7 @@ const styles = StyleSheet.create({
     flex: 1, // Hace que este contenedor use todo el espacio disponible
     justifyContent: 'flex-start', // Alinea hacia arriba
     alignItems: 'center', // Centra horizontalmente
-    marginTop: 240, // Sube las imágenes más cerca de la principal
+    marginTop: 230, // Sube las imágenes más cerca de la principal
   },
 
   colorContainer: {
