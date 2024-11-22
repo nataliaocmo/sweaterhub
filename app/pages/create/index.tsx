@@ -4,9 +4,22 @@ import Background from '@/components/background'
 import Topbar from '@/components/topbar'
 import Menu from '@/components/menu';
 import LinearGradient from 'react-native-linear-gradient';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function index() {
     const [isDrawer, setIsDrawer] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(require('@/assets/images/hoodie_front.png')); // Imagen inicial
+    const [selectedColor, setSelectedColor] = useState('transparent'); // Color inicial transparente
+
+    const chooseColor = () =>{
+
+    }
+
+    const chooseWhere = () =>{
+
+    }
+
+    
 
   return (
     <>
@@ -15,7 +28,7 @@ export default function index() {
 
       <View style={styles.container}>
         <Image 
-        source= {require('@/assets/images/hoodie_front.png')}
+        source= {selectedImage}
         style={{width: 300, height: 300}}
         >
         </Image>
@@ -23,7 +36,8 @@ export default function index() {
 
       <View style={styles.optionContainer}>
         <View style={styles.options} >
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => setSelectedImage(require('@/assets/images/hoodie_front.png'))}>
 
           <Image 
           source= {require('@/assets/images/hoodie_front.png')}
@@ -34,9 +48,11 @@ export default function index() {
           </TouchableOpacity>
           
 
-          <TouchableOpacity>
-
+          <TouchableOpacity
+            onPress={() => setSelectedImage(require('@/assets/images/hoodie_back.png'))}
+          >
           <Image 
+          
           source= {require('@/assets/images/hoodie_back.png')}
           style={{width: 150, height: 150}}
           >
@@ -45,7 +61,9 @@ export default function index() {
           </TouchableOpacity>
 
     
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => setSelectedImage(require('@/assets/images/hoodie_sleeve.png'))}
+          >
           <Image 
           source= {require('@/assets/images/hoodie_sleeve.png')}
           style={{width: 115, height: 115 }}
@@ -62,6 +80,10 @@ export default function index() {
         <View style={styles.colors}>
           
           <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: 'white' }]}></Text></TouchableOpacity>
+
+          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#f3e1ff' }]}></Text></TouchableOpacity>
+
+          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#999999' }]}></Text></TouchableOpacity>
           
           <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#000000' }]}></Text></TouchableOpacity>
           
@@ -69,13 +91,26 @@ export default function index() {
           
           <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#004805' }]}></Text></TouchableOpacity>
           
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#8800FF' }]}></Text></TouchableOpacity>
           
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#8800FF' }]}></Text></TouchableOpacity>
+          
+          
           
           
         </View>
       </View>
+
+      <View style={styles.container}>
+      <TouchableOpacity
+            // onPress={save}
+            style={[styles.button, styles.logbutton]}
+          >
+          <FontAwesome name="photo" size={24} color="white" />
+        </TouchableOpacity>
+
+      </View>
+
+        
+
       <View style={styles.buttonView}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -121,7 +156,7 @@ const styles = StyleSheet.create({
     flex: 1, // Hace que este contenedor use todo el espacio disponible
     justifyContent: 'flex-start', // Alinea hacia arriba
     alignItems: 'center', // Centra horizontalmente
-    marginTop: 150, // Sube las imágenes más cerca de la principal
+    marginTop: 240, // Sube las imágenes más cerca de la principal
   },
 
   colorContainer: {
