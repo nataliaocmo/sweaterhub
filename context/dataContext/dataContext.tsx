@@ -1,3 +1,4 @@
+import React from 'react';
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { DataReducer, DataState } from "./dataReducer";
 import { userProps } from "@/interfaces/authinterfaces";
@@ -6,13 +7,14 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/utils/firebaseConfig";
 import { AuthContext } from "../authContext/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from 'react-native';
 
 interface DataContextProps {
   dataState: userProps;
   getUserinfo: (uid: string) => Promise<void>;
-  storeData: (key: any, value: any) => Promise<void>;
+  storeData: (uid: any,value: any) => Promise<void>;
   removeData: (key: any) => Promise<void>;
-  getData: (key: any) => Promise<void>;
+  getData: (uid: any) => Promise<void>;
 }
 
 const defaultValues: DataState = {
@@ -27,7 +29,6 @@ export const dataContext = createContext({} as DataContextProps);
 
 export const DataProvider = ({ children }: any) => {
   const [dataState, dispatch] = useReducer(DataReducer, defaultValues);
-  const { state: authState } = useContext(AuthContext); // Accede al estado de AuthContext si está disponible
 
   // Función para cargar información del usuario desde Firestore
   const getUserinfo = async (uid: string) => {
@@ -62,24 +63,27 @@ export const DataProvider = ({ children }: any) => {
     return () => unsubscribe(); // Limpia el listener al desmontar el componente
   }, []);
 
-  const storeData = async (key: any, value: any) => {
+  const storeData = async (uid: any,value: any) => {
     try {
-      await AsyncStorage.setItem(key, value);
+      const stringValue = JSON.stringify(value);
+      await AsyncStorage.setItem(uid, stringValue);
       console.log("Data stored successfully");
     } catch (e) {
       console.error("Error storing data:", e);
     }
   };
+  
 
-  const getData = async (key: any) => {
+  const getData = async (uid: any) => {
     try {
-      const value = await AsyncStorage.getItem(key);
+      const value = await AsyncStorage.getItem(uid);
       if (value !== null) {
         console.log("Retrieved value:", value);
         dispatch({ type: "CARD", payload: value})
       }
     } catch (e) {
       console.error("Error retrieving data:", e);
+      Alert.alert("no card avilable, add a payment methon on profile")
     }
   };
 

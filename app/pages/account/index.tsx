@@ -48,9 +48,10 @@ export default function index() {
     }
 
     const editHandler = (text: String, data: number) => {
-      setIsSeen(true);
-      setText(text.toString())
-      setData(data)
+        setIsSeen(true);
+        setText(text.toString())
+        setData(data)
+      
     };
 
     return (

@@ -20,7 +20,7 @@ export default function Index() {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [isDrawer, setIsDrawer] = useState(false);
   const { state } = useContext(AuthContext);
-  const { dataState, getUserinfo } = useContext(dataContext);
+  const { dataState, getUserinfo, getData } = useContext(dataContext);
 
   useEffect(() => {
     async function loadFonts() {
@@ -37,6 +37,7 @@ export default function Index() {
     if(state.isLogged){
       getUserinfo(state.user.uid);
     }
+    
   },[])
 
   const closeMenu = () => setIsDrawer(false);
