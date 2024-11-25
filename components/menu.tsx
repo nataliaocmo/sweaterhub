@@ -33,7 +33,7 @@ export default function Menu({ isDrawer, onClose, fontFamily }: MenuProps) {
           <TouchableOpacity>
             <Text style={[styles.title, { fontFamily }]}>Explore</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{router.push('/pages/ia'); onClose()}}>
             <Text style={[styles.title, { fontFamily }]}>AI</Text>
           </TouchableOpacity>
         </View>
