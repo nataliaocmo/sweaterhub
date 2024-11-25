@@ -1,11 +1,3 @@
-export interface DataState{
-    name?: String;
-    lastname?: String;
-    email?: String;
-    orders?: any
-    card?: [];
-}
-
 type ActionsProps = {type:"GET",payload: any} | {type:"LOGOUT"}
 
 export const DataReducer = (state:any, actions:any)=> {

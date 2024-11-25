@@ -1,13 +1,14 @@
 import React from 'react';
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { DataReducer, DataState } from "./dataReducer";
+import { DataReducer } from "./dataReducer";
 import { userProps } from "@/interfaces/authinterfaces";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/utils/firebaseConfig";
 import { AuthContext } from "../authContext/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from 'react-native';
+import { DataState } from '@/interfaces/dataInterfaces';
 
 interface DataContextProps {
   dataState: userProps;
@@ -15,14 +16,16 @@ interface DataContextProps {
   storeData: (uid: any,value: any) => Promise<void>;
   removeData: (key: any) => Promise<void>;
   getData: (uid: any) => Promise<void>;
+  update: (uid: any, data: any, type: String) => Promise<void>
 }
 
 const defaultValues: DataState = {
-  name: undefined,
-  lastname: undefined,
-  email: undefined,
+  name: "",
+  lastname: "",
+  email: "",
   orders: undefined,
-  card: undefined 
+  card: undefined ,
+  location: ""
 };
 
 export const dataContext = createContext({} as DataContextProps);
@@ -96,6 +99,16 @@ export const DataProvider = ({ children }: any) => {
     }
   };
 
+  const update = async (uid: any, data: any, type:String) =>{
+    const docRef = doc(db, "users", uid);
+    try{
+      await updateDoc(docRef, {[type.toString()]: data.toString()});
+    }catch (error) {
+      console.log(error);
+    }
+    getUserinfo(uid);
+  }
+
   return (
     <dataContext.Provider
       value={{
@@ -103,7 +116,8 @@ export const DataProvider = ({ children }: any) => {
         getUserinfo,
         storeData,
         removeData,
-        getData
+        getData,
+        update
       }}
     >
       {children}

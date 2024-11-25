@@ -1,7 +1,8 @@
-export interface userProps{
+export interface DataState{
     name: String,
     lastname: String,
     email: String,
     orders?: any,
-    card?: []
+    card?: [],
+    location: String
 }
