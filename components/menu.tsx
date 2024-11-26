@@ -30,9 +30,6 @@ export default function Menu({ isDrawer, onClose, fontFamily }: MenuProps) {
           <TouchableOpacity onPress={()=>{router.push('/pages/designs');onClose();}}>
             <Text style={[styles.title, { fontFamily }]}>My designs</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={[styles.title, { fontFamily }]}>Explore</Text>
-          </TouchableOpacity>
             <TouchableOpacity onPress={()=>{router.push('/pages/NewImages'); onClose()}}>
             <Text style={[styles.title, { fontFamily }]}>New Images</Text>
           </TouchableOpacity>
