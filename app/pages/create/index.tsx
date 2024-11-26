@@ -1,10 +1,11 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Background from '@/components/background'
 import Topbar from '@/components/topbar'
 import Menu from '@/components/menu';
-import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Canvas } from '@react-three/fiber/native';
+import { OrbitControls } from '@react-three/drei';
 
 export default function index() {
     const [isDrawer, setIsDrawer] = useState(false);
@@ -16,121 +17,84 @@ export default function index() {
       setSelectedColor(color);
     };
 
-    const chooseWhere = () =>{
-
-    }
-
-    
-
   return (
     <>
     <Background>
     <Topbar setIsDrawer={setIsDrawer} title={"Create"}/>
 
-      <View style={styles.container}>
-        <Image 
-        source= {selectedImage}
-        style={{width: 300, height: 300}}
-       
-        >
-        </Image>
+    <View style={styles.container}>
+      {/* Botón para foto */}
+      <TouchableOpacity
+        style={[styles.img]}
+      >
+        <FontAwesome name="photo" size={24} color="white" />
+      </TouchableOpacity>
+
+      {/* Contenedor principal del objeto */}
+      <View style={styles.containerObject}>
+        <Canvas style={{ width: '100%', height: 350 }} shadows camera={{ position: [0, 0, 5], fov: 50 }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[0, 10, 5]} intensity={1} />
+          <mesh>
+            <torusKnotGeometry args={[0.9, 0.5, 74, 10]} />
+            <meshStandardMaterial color={selectedColor} />
+          </mesh>
+          {/* Orbit Controls */}
+          <OrbitControls />
+        </Canvas>
       </View>
 
-      <View style={styles.optionContainer}>
-        <View style={styles.options} >
-          <TouchableOpacity
-          onPress={() => setSelectedImage(require('@/assets/images/hoodie_front.png'))}>
-
-          <Image 
-          source= {require('@/assets/images/hoodie_front.png')}
-          style={{width: 150, height: 150}}
-          >
-          </Image>
-
-          </TouchableOpacity>
-          
-
-          <TouchableOpacity
-            onPress={() => setSelectedImage(require('@/assets/images/hoodie_back.png'))}
-          >
-          <Image 
-          
-          source= {require('@/assets/images/hoodie_back.png')}
-          style={{width: 150, height: 150}}
-          >
-          </Image>
-
-          </TouchableOpacity>
-
-    
-          <TouchableOpacity
-          onPress={() => setSelectedImage(require('@/assets/images/hoodie_sleeve.png'))}
-          >
-          <Image 
-          source= {require('@/assets/images/hoodie_sleeve.png')}
-          style={{width: 115, height: 115 }}
-          >
-          </Image>
-
-          </TouchableOpacity>
-
-          
-        </View>
-      </View>
-
+      {/* Contenedor de los botones de colores */}
       <View style={styles.colorContainer}>
         <View style={styles.colors}>
-          
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: 'white' }]}></Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => chooseColor('#00f7ff')}>
+            <Text style={[styles.colorCircle, { backgroundColor: '#00f7ff' }]}></Text>
+          </TouchableOpacity>
 
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#f3e1ff' }]}></Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => chooseColor('#cd00ff')}>
+            <Text style={[styles.colorCircle, { backgroundColor: '#cd00ff' }]}></Text>
+          </TouchableOpacity>
 
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#999999' }]}></Text></TouchableOpacity>
-          
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#000000' }]}></Text></TouchableOpacity>
-          
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#00013F' }]}></Text></TouchableOpacity>
-          
-          <TouchableOpacity><Text style={[styles.colorCircle, { backgroundColor: '#004805' }]}></Text></TouchableOpacity>
-          
+          <TouchableOpacity onPress={() => chooseColor('#fbff00')}>
+            <Text style={[styles.colorCircle, { backgroundColor: '#fbff00' }]}></Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => chooseColor('#ffffff')}>
+            <Text style={[styles.colorCircle, { backgroundColor: '#ffffff' }]}></Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => chooseColor('#002eff')}>
+            <Text style={[styles.colorCircle, { backgroundColor: '#002eff' }]}></Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => chooseColor('#00ff27')}>
+            <Text style={[styles.colorCircle, { backgroundColor: '#00ff27' }]}></Text>
+          </TouchableOpacity>
         </View>
       </View>
 
-      <View style={styles.container}>
-      <TouchableOpacity
-            // onPress={save}
-            style={[styles.button, styles.logbutton]}
-          >
-          <FontAwesome name="photo" size={24} color="white" />
-        </TouchableOpacity>
+      
 
-      </View>
-
-        
-
+      {/* Contenedor de los botones "Save Draft" y "Add to Cart" */}
       <View style={styles.buttonView}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-              // onPress={save}
-              style={[styles.button, styles.logbutton]}
-            >
+            style={[styles.button, styles.logbutton]}
+          >
             <Text style={[styles.textType]}>Save Draft</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-              // onPress={save}
-              style={[styles.button, styles.logbutton]}
-            >
-            <Text style={[styles.textType]}>Next</Text>
+            style={[styles.button, styles.logbutton]}
+          >
+            <Text style={[styles.textType]}>Add to Cart</Text>
           </TouchableOpacity>
         </View>
       </View>
-      
-      
+
+    </View>
     </Background>
 
-    
-    
     <Menu isDrawer={isDrawer} onClose={() => setIsDrawer(false)} fontFamily="Calistoga"/>
     </>
   )
@@ -138,58 +102,43 @@ export default function index() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Ocupa toda la pantalla
-    justifyContent: 'flex-start', // Centra verticalmente
+    flex: 1, 
+    flexDirection: 'column',
+    justifyContent: 'space-between', // Distribuye el espacio entre los componentes
+    paddingBottom: 50, // Añade espacio en la parte inferior para los botones
+  },
+  containerObject: {
+    flex: 1, 
+    justifyContent: 'center', // Centra verticalmente
     alignItems: 'center', // Centra horizontalmente
+    marginTop: 20, // Un poco de margen superior
   },
-
-  options: {
-    flexDirection: 'row', // Organiza los elementos en una fila
-    justifyContent: 'center', // Alinea los elementos horizontalmente
-    alignItems: 'center', // Alinea los elementos verticalmente
-  },
-
-  optionContainer: {
-    flex: 1, // Hace que este contenedor use todo el espacio disponible
-    justifyContent: 'flex-start', // Alinea hacia arriba
-    alignItems: 'center', // Centra horizontalmente
-    marginTop: 230, // Sube las imágenes más cerca de la principal
-  },
-
   colorContainer: {
-    flex: 1, // Hace que este contenedor use todo el espacio disponible
-    
-    marginTop: 30, // Sube las imágenes más cerca de la principal
+    flex: 0.3, // Reduce el tamaño del contenedor de colores
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40, // Ajusta la distancia con el objeto 3D
   },
-
-   colors: {
-    flexDirection: 'row', // Organiza los círculos horizontalmente
-    justifyContent: 'center', // Centra los círculos
-    alignItems: 'center', // Alinea los círculos en el centro
-    marginTop: 20, // Un poco de espacio sobre los círculos
+  colors: {
+    flexDirection: 'row', 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-
-
   colorCircle: {
-    width: 40, // Tamaño del círculo
-    height: 40, // Tamaño del círculo
-    borderRadius: 20, // Hace que sea redondo
-    backgroundColor: 'red', // Color del círculo
-    marginHorizontal: 10, // Espacio entre los círculos
-    textAlign: 'center', // Centra el texto (aunque no hay texto visible)
-    lineHeight: 40, // Asegura que cualquier texto visible esté centrado verticalmente
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginHorizontal: 10,
   },
-
-  circle: {
-    width: 150, // Tamaño del círculo
-    height: 150, // Tamaño del círculo
-    borderRadius: 75, // Hace que sea un círculo
-    justifyContent: 'center', // Centra el contenido (si lo hubiera)
-    alignItems: 'center', // Centra el contenido (si lo hubiera)
+  buttonView: {
+    flex: 0.2,
+    justifyContent: 'flex-end', // Alinea los botones al final
+    alignItems: 'center',
   },
-  text: {
-    color: 'white',
-    fontSize: 16,
+  buttonContainer: {
+    flexDirection: "row", // Alinea los botones en una fila
+    justifyContent: 'center',
+    width: '100%', // Asegura que los botones ocupen todo el ancho
   },
   button: {
     paddingHorizontal: 20,
@@ -199,22 +148,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   logbutton: {
-    display: "flex",
     backgroundColor: "#093450",
     alignItems: "center",
-    width: "50%",
-    marginBottom: 50,
+    width: "45%", // Botones más estrechos
+    marginBottom: 20, // Separación entre botones
   },
   textType: {
     color: "white",
     fontFamily: "Calistoga",
   },
-
-  buttonContainer: {
-    flexDirection: "row",
+  img: {
+    position: 'absolute', // Posiciona el botón de foto encima
+    top: 20, // Colócalo un poco abajo desde la parte superior
+    left: '50%', // Centra el botón horizontalmente
+    transform: [{ translateX: -20 }], // Ajusta el botón para que esté perfectamente centrado
+    zIndex: 10, // Asegura que esté encima de otros elementos
   },
-  buttonView:{
-    flex: 1, // Hace que este contenedor use todo el espacio disponible
-    justifyContent: 'flex-end', // Alinea hacia arriba
-  }
 });
