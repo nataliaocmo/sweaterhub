@@ -108,20 +108,20 @@ export default function Index() {
         >
           <View style={styles.modalOverlay}>
             <View style={styles.modalContent}>
-              <Text style={styles.modalText}>¿Quieres usar esta imagen?</Text>
+              <Text style={styles.modalText}>¿Do you want to use this image?</Text>
               <Image source={{ uri: selectedImage.urls.small }} style={styles.modalImage} />
               <View style={styles.modalButtons}>
                 <TouchableOpacity
                   style={[styles.modalButton, styles.cancelButton]}
                   onPress={() => setIsModalVisible(false)}
                 >
-                  <Text style={styles.modalButtonText}>Cancelar</Text>
+                  <Text style={styles.modalButtonText}>Cancel</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[styles.modalButton, styles.confirmButton]}
                   onPress={confirmImageSelection}
                 >
-                  <Text style={styles.modalButtonText}>Usar imagen</Text>
+                  <Text style={styles.modalButtonText}>Use Image</Text>
                 </TouchableOpacity>
               </View>
             </View>
