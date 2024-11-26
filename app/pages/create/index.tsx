@@ -55,20 +55,15 @@ export default function Index() {
         style={[styles.img]}
         onPress={pickImage}
       >
-        {currentPhoto && <Image source={{ uri: currentPhoto }} style={styles.image} />}
+        
       
         <FontAwesome name="photo" size={24} color="white" />
       </TouchableOpacity>
-
-          {imageUrl ? (
             <Image
-              source={{ uri: imageUrl }} // Utiliza la URL para cargar la imagen
+              source={{ uri: imageUrl || currentPhoto }} // Utiliza la URL para cargar la imagen
               style={styles.image} // Estilo de la imagen
               resizeMode="contain" // Ajuste del tamaño de la imagen
             />
-          ) : (
-            <Text>No se proporcionó una imagen</Text> // Muestra un mensaje si no hay imagen
-          )}
         </View>
       </Background>
       <Menu isDrawer={isDrawer} onClose={closeMenu} fontFamily="Calistoga" />
