@@ -11,9 +11,10 @@ export default function index() {
     const [selectedImage, setSelectedImage] = useState(require('@/assets/images/hoodie_front.png')); // Imagen inicial
     const [selectedColor, setSelectedColor] = useState('transparent'); // Color inicial transparente
 
-    const chooseColor = () =>{
-
-    }
+    const chooseColor = (color: any) => {
+      console.log("Color seleccionado:", color); // Para depuración
+      setSelectedColor(color);
+    };
 
     const chooseWhere = () =>{
 
