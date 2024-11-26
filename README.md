@@ -16,7 +16,7 @@ La aplicación móvil ofrece una solución innovadora para la personalización d
 3. La aplicación debe correr en dispositivos Android y IOS
 4. La aplicación debe permitir al usuario crear sus propios diseños y guardarlos en su cuenta
 5. La aplicación debe permitir al usuario explorar imagenes que pueda colocar en su diseño
-6. La aplicación debe alertar al usuario acerca de nuevas actualizaciones
+6. La aplicación debe alertar al usuario acerca de nuevas actualizaciones y que lo motive a ingresar a la aplicación para que cree sus propios diseños
 7. La aplicación debe permitir al usuario acceder a un Chat Bot para resolver sus dudas
 8. La aplicación debe permitir al usuario agregar sus diseños al carrito de compras
 ## Riesgos
