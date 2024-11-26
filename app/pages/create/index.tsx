@@ -64,6 +64,23 @@ export default function Index() {
               style={styles.image} // Estilo de la imagen
               resizeMode="contain" // Ajuste del tamaño de la imagen
             />
+
+            {/* Contenedor de los botones "Save Draft" y "Add to Cart" */}
+          <View style={styles.buttonView}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.button, styles.logbutton]}
+            >
+              <Text style={[styles.textType]}>Save Draft</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.button, styles.logbutton]}
+            >
+              <Text style={[styles.textType]}>Add to Cart</Text>
+            </TouchableOpacity>
+          </View>
+          </View>
         </View>
       </Background>
       <Menu isDrawer={isDrawer} onClose={closeMenu} fontFamily="Calistoga" />
@@ -79,8 +96,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: 300, // Ancho de la imagen
-    height: 300, // Altura de la imagen
+    width: 200, // Ancho de la imagen
+    height: 200, // Altura de la imagen
   },
   img: {
     position: 'absolute', // Posiciona el botón de foto encima
@@ -89,4 +106,34 @@ const styles = StyleSheet.create({
     transform: [{ translateX: -20 }], // Ajusta el botón para que esté perfectamente centrado
     zIndex: 10, // Asegura que esté encima de otros elementos
   },
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.6)",
+    marginBottom: 10,
+    },
+    logbutton: {
+    backgroundColor: "#093450",
+    alignItems: "center",
+    width: "45%", // Botones más estrechos
+    marginBottom: 20, // Separación entre botones
+    },
+    textType: {
+    color: "white",
+    fontFamily: "Calistoga",
+    },
+    buttonView: {
+      flex: 0.2,
+      justifyContent: 'flex-end', // Alinea los botones al final
+      alignItems: 'center',
+      },
+      buttonContainer: {
+      flexDirection: "row", // Alinea los botones en una fila
+      justifyContent: 'center',
+      width: '100%', // Asegura que los botones ocupen todo el ancho
+      },
 });
+
+
+
