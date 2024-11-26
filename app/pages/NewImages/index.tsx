@@ -64,10 +64,13 @@ export default function Index() {
   const confirmImageSelection = () => {
     if (selectedImage) {
       setIsModalVisible(false); // Cierra el modal
+      console.log('Imagen seleccionada:', selectedImage.urls.full);
       router.push({
         pathname: '/pages/create',
         params: { imageUrl: selectedImage.urls.full }, // Pasa la URL de la imagen a la página de creación
+        
       });
+      
     }
   };
 
