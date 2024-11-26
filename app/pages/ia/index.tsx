@@ -100,10 +100,10 @@ import {
                 style={styles.input}
                 value={input}
                 onChangeText={setInput}
-                placeholder="Escribe tu mensaje..."
+                placeholder="Type your message..."
                 placeholderTextColor="#CCC" // Placeholder gris claro para visibilidad
               />
-              <Button title="Enviar" onPress={sendMessage} />
+              <Button title="Send" onPress={sendMessage} />
             </View>
           </KeyboardAvoidingView>
         </Background>

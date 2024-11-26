@@ -49,7 +49,7 @@ export default function Index() {
 
   return (
     <Background>
-      <Topbar setIsDrawer={setIsDrawer} title="New Images" />
+      <Topbar setIsDrawer={setIsDrawer} title="Explore" />
       <Menu isDrawer={isDrawer} onClose={closeMenu} fontFamily="Calistoga" />
 
       {/* Contenedor del buscador */}
