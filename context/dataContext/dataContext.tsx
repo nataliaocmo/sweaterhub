@@ -3,12 +3,14 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { DataReducer } from "./dataReducer";
 import { userProps } from "@/interfaces/authinterfaces";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/utils/firebaseConfig";
 import { AuthContext } from "../authContext/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from 'react-native';
 import { DataState } from '@/interfaces/dataInterfaces';
+import { getDownloadURL, getStorage, ref, uploadBytes, uploadString } from "firebase/storage";
+import { DefaultResponse, DraftProps } from '@/interfaces/draftInterfaces';
 
 interface DataContextProps {
   dataState: userProps;
@@ -17,6 +19,7 @@ interface DataContextProps {
   removeData: (key: any) => Promise<void>;
   getData: (uid: any) => Promise<void>;
   update: (uid: any, data: any, type: String) => Promise<void>
+  saveDraft: ( draft: any)  => Promise<DefaultResponse>;
 }
 
 const defaultValues: DataState = {
@@ -109,6 +112,48 @@ export const DataProvider = ({ children }: any) => {
     getUserinfo(uid);
   }
 
+
+  const uploadImage = async (uri: string) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, 'drafts/'+ Date.now());
+    try {
+        const response = await fetch(uri);
+        const blob = await response.blob();
+        const snapshot =await uploadBytes(storageRef,blob);
+        const url = await getDownloadURL(storageRef);
+        console.log('Uploaded a raw string!');
+        console.log({
+            snapshot
+        })
+        return url?? "";
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const saveDraft = async (newDraft: DraftProps): Promise<DefaultResponse> =>  {
+  try {
+      const urlImage = await uploadImage(newDraft.img);
+
+      const docRef = await addDoc(collection(db, "drafts"), {
+          ...newDraft,
+          image: urlImage
+      });
+      console.log("Document written with ID: ", docRef.id);
+      return {
+          isSuccess: true,
+          message: "Creado con exito"
+      }
+      
+  } catch (error) {
+      console.log(error);
+      return {
+          isSuccess: false,
+          message: "Hubo un error: " + error
+      }
+  }
+}
+
   return (
     <dataContext.Provider
       value={{
@@ -117,7 +162,8 @@ export const DataProvider = ({ children }: any) => {
         storeData,
         removeData,
         getData,
-        update
+        update,
+        saveDraft
       }}
     >
       {children}

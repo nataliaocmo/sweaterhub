@@ -1,14 +1,17 @@
-import {View,StyleSheet,Text,TouchableOpacity, Image} from 'react-native';
-import React, { useEffect, useState, } from 'react';
+import {View,StyleSheet,Text,TouchableOpacity, Image, Alert} from 'react-native';
+import React, { useContext, useEffect, useState, } from 'react';
 import Background from '@/components/background';
 import Topbar from '@/components/topbar';
 import Menu from '@/components/menu';
 import { useLocalSearchParams } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import * as ImagePicker from 'expo-image-picker';
+import { dataContext } from '@/context/dataContext/dataContext';
 
 
 export default function Index() {
+
+  const { saveDraft } = useContext(dataContext);
 
   // Obtener la URL de la imagen pasada como parámetro
   const { imageUrl } = useLocalSearchParams<{ imageUrl: string }>();
@@ -17,6 +20,7 @@ export default function Index() {
   const [isDrawer, setIsDrawer] = useState(false);
   const closeMenu = () => setIsDrawer(false);
   const [currentPhoto, setCurrentPhoto] = useState(undefined as any);
+  const [selectedColor, setSelectedColor] = useState('rgba(0, 0, 0, 0)'); // Color inicial transparente
 
    // Confirmar que el componente se monta
    useEffect(() => {
@@ -42,6 +46,21 @@ export default function Index() {
       setCurrentPhoto(result.assets[0].uri);
     }
   };
+
+  const handleSavePost = async () => {
+    // const [isLoading, setIsLoading] = useState(false); // Estado para controlar el popup
+    // setIsLoading(true); // Mostrar el popup cuando comience la petición
+    const response = await saveDraft({
+        img: imageUrl||currentPhoto.uri,
+        color: selectedColor,
+        part: "body"
+    })
+    console.log(response);
+    if(response){
+        Alert.alert("Love that creativity! Draft saved correctly")
+    }
+   
+}
  
   return (
     <>
@@ -70,6 +89,7 @@ export default function Index() {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[styles.button, styles.logbutton]}
+              onPress={handleSavePost}
             >
               <Text style={[styles.textType]}>Save Draft</Text>
             </TouchableOpacity>
