@@ -1,7 +1,8 @@
 import {
   View,
   Image,
-  StyleSheet,Text
+  StyleSheet,Text,
+  TouchableOpacity
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Background from '@/components/background';
@@ -31,7 +32,16 @@ export default function Index() {
     <>
       <Background>
         <Topbar setIsDrawer={setIsDrawer} title="Create" />
+
+        
         <View style={styles.container}>
+
+        <TouchableOpacity
+        style={[styles.img]}
+      >
+        <FontAwesome name="photo" size={24} color="white" />
+      </TouchableOpacity>
+
           {imageUrl ? (
             <Image
               source={{ uri: imageUrl }} // Utiliza la URL para cargar la imagen
@@ -51,6 +61,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
   },
