@@ -10,7 +10,7 @@ export default function index() {
     return (
       <>
       <Background>
-          <Topbar setIsDrawer={setIsDrawer} title={"Create"} icon='home-outline' route='/'/>
+          <Topbar setIsDrawer={setIsDrawer} title={"Cart"} icon='home-outline' route='/'/>
         <Text>index</Text>
   
       </Background>
