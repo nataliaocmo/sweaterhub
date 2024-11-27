@@ -31,6 +31,9 @@ La aplicación móvil ofrece una solución innovadora para la personalización d
 2. Presupuesto limitado: Los recursos económicos deben ser distribuidos entre desarrollo, diseño y marketing de manera equilibrada.
 3. Disponibilidad de la API: La aplicación depende de la estabilidad y licencias asociadas a la API de imágenes externas.
 
+## Figma
+https://www.figma.com/design/bs6t9WoDEpmZKi90DAqO7i/Untitled?node-id=0-1&t=jmrYfUFQJdIvEbMr-1
+
 
 ## Historias de usuario
 https://trello.com/invite/b/67216b9ca0b3c7a45615434c/ATTId70094ff78881dc9fd12465929e63fea7FE43A9B/proyecto-movil
